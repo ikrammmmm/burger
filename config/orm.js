@@ -1,4 +1,4 @@
- dbCon = require('./connection.js');
+dbCon = require('./connection.js');
 const ORM = function(table){
   this.table = table;
 
@@ -34,8 +34,6 @@ const ORM = function(table){
         });
     })
   }
-
-
 }
 
 module.exports = ORM;
