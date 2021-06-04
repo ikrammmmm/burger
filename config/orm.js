@@ -1,26 +1,41 @@
  dbCon = require('./connection.js');
+const ORM = function(table){
+  this.table = table;
 
-module.exports = {
-    selectAll: function(callback) {
-        dbCon.query("SELECT * FROM burgers", callback)
-    },
-  
-    insertOne: function( burger_name, callback) {
-        dbCon.query(
-        `INSERT INTO burgers SET 
-        burger_name = '${burger_name}', 
-        devoured = 0`,
-        callback
-      )
-    },
-  
-    updateOne: function(devoured, id, callback) {
-        dbCon.query(
-        `UPDATE burgers SET 
-        devoured = '${devoured}' 
-        WHERE id = ${id}`,
-        callback
-      )
-    },
+  this.selectAll = function(){
+    const sql = `SELECT * FROM ??`;
 
+    return new Promise(function(resolve, reject){
+        dbCon.query(sql, table, function(error, data) {
+            if (error) reject(error);
+            resolve(data);
+        });
+    })
+  },
+
+  this.insertOne = function(burger_name){
+    const sql = `INSERT INTO ?? (burger_name, devoured) VALUES (?, ?)`;
+
+    return new Promise(function(resolve, reject){
+        dbCon.query(sql, [table, burger_name,0], function(error, data) {
+            if (error) reject(error);
+            resolve(data);
+        });
+    })
+  },
+
+  this.updateOne = function(devoured, id){
+    const sql = `UPDATE ?? SET devoured = ? WHERE id = ?`;
+
+    return new Promise(function(resolve, reject){
+        dbCon.query(sql, [table, devoured, id], function(error, data) {
+            if (error) reject(error);
+            resolve(data);
+        });
+    })
   }
+
+
+}
+
+module.exports = ORM;
