@@ -5,23 +5,21 @@ var router      = express.Router();
 router.get('/', function (req, res) {
     burger.selectAll()
     .then(function(data){
-        
-        res.json({data})
+        var hbsData = {
+            burgers: data
+        };
+        res.render("index", hbsData);
       })
       .catch(function(err){
-        res.json({error:true})
+        res.json(err)
       });
 })
 
 router.post('/insert', function (req, res) {
-    burger_name = req.query.burger_name;
+    burger_name = req.body.burger_name;
     burger.insertOne(burger_name)
     .then(function(data){
-        if(data.insertId)
-        {
-            res.json({error:false})
-        }
-        else res.json({error:false})
+        res.redirect("/");
         
       })
       .catch(function(err){
@@ -30,16 +28,12 @@ router.post('/insert', function (req, res) {
     
   })
 
-router.post('/devoure', function (req, res) {
-    burger_id = req.query.burger_id;
+router.post('/:id', function (req, res) {
+    var burger_id = req.params.id;
+
     burger.updateOne(1,burger_id)
     .then(function(data){
-        if(data.affectedRows)
-        {
-            res.json({error:false})
-        }
-        else res.json({error:false})
-        
+       res.redirect("/");
       })
       .catch(function(err){
         res.json({error:true})
