@@ -1,6 +1,10 @@
 # Eat Da Burger APP
 This is a burger logger app with MySQL, Node, Express, Handlebars and a homemade ORM. User can add burgers by entering there name and add burgers to devoured to list and we can make them diveoured by clicking devoured
 
+## Screenshots
+
+![Eat a Burger app screenshot](./screenshots/screenshot.png?raw=true "Screenshot")
+
 ## Demo App
 
 ```https://eat-burger-app-ikramm.herokuapp.com/```
