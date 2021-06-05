@@ -13,4 +13,7 @@ app.use('/', routes);
 app.use(express.static(process.cwd() + "/public"));
 
 
-app.listen(9000);
+var appPort = process.env.PORT || 3000;
+
+
+app.listen(appPort);
