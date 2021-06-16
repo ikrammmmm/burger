@@ -14,8 +14,8 @@ app.use(express.static(process.cwd() + "/public"));
 
 
 var appPort = process.env.PORT || 3000;
+var appHost = '127.0.0.1' || '0.0.0.0';
 
-
-app.listen(appPort, function(){
+app.listen(appPort,appHost, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
