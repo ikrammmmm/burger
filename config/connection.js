@@ -6,13 +6,13 @@ var db_config = {
   database:"heroku_32db7ec924b81f2"
 };
 var connection;
-
 function connectDatabase()
 {
   var connection = mysql.createConnection(db_config);
   connection.connect(function(err) {
+    console.log(err)
     if (err) connectDatabase();
   });
 }
 connectDatabase()
-  module.exports = connection;
+module.exports = connection;
