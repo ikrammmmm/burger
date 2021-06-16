@@ -1,22 +1,14 @@
 var mysql = require('mysql');
+require("dotenv").config()
+
 var db_config = {
-  host: "us-cdbr-east-04.cleardb.com",
-  user: "bc6c5983a04300",
-  password: "cf2557be",
-  database:"heroku_32db7ec924b81f2"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database:process.env.DB_DATABSE
 };
-var connection;
-function connectDatabase()
-{
-  var connection = mysql.createConnection(db_config);
+var connection = mysql.createConnection(db_config);
   connection.connect(function(err) {
-   
-    if (err) {
-      console.log("error:", err)
-      console.log("reconnecting")
-      connectDatabase();
-    }
+    if (err) throw err;
   });
-}
-connectDatabase()
-module.exports = connection;
+  module.exports = connection;
