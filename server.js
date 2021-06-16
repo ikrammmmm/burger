@@ -13,7 +13,7 @@ app.use('/', routes);
 app.use(express.static(process.cwd() + "/public"));
 
 
-var appPort = process.env.PORT || 3000;
+var appPort = process.env.PORT || 5000;
 var appHost = '127.0.0.1' || '0.0.0.0';
 
 app.listen(appPort,appHost, function(){
