@@ -10,8 +10,12 @@ function connectDatabase()
 {
   var connection = mysql.createConnection(db_config);
   connection.connect(function(err) {
-    console.log(err)
-    if (err) connectDatabase();
+   
+    if (err) {
+      console.log("error:", err)
+      console.log("reconnecting")
+      connectDatabase();
+    }
   });
 }
 connectDatabase()
